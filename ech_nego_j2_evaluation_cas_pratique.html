@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Évaluation de fin de journée — Jour 2 · Négociation</title>
+<style>
+:root{--prune:#8C1E70;--dark:#5E1349;--light:#F4E6EE;--rose:#C77BAA;--vert:#283C28;--gris:#3C3C3C;--gmoy:#8A7A85;--trame:#E8DCE5;--fond:#FAF6F8;--ok:#2F7A4F;--ko:#B23B3B;--mid:#B5852A}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:Calibri,"Segoe UI",Carlito,Arial,sans-serif;background:var(--fond);color:var(--gris);font-size:16px;line-height:1.5}
+.wrap{max-width:980px;margin:0 auto;padding:0 18px 40px}
+header.top{background:var(--dark);color:#fff;padding:22px 0 20px;border-bottom:5px solid var(--rose)}
+header.top .kick{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--rose);font-weight:700}
+header.top h1{margin:6px 0 4px;font-size:28px;line-height:1.2}
+header.top .sub{color:var(--trame);font-style:italic}
+.card{background:#fff;border:1px solid var(--trame);border-radius:10px;padding:20px 22px;margin:18px 0;box-shadow:0 1px 3px rgba(94,19,73,.06)}
+.card h2{margin:0 0 6px;color:var(--dark);font-size:21px}
+.card h3{margin:14px 0 6px;color:var(--prune);font-size:17px}
+.consigne{background:var(--light);border-left:5px solid var(--prune);padding:12px 16px;border-radius:0 8px 8px 0;margin:10px 0 14px}
+.tag{display:inline-block;background:var(--light);color:var(--prune);font-weight:700;font-size:12px;padding:2px 9px;border-radius:20px;margin-right:6px}
+.item{display:grid;grid-template-columns:1fr 290px;gap:12px;align-items:center;padding:10px 0;border-top:1px solid var(--trame)}
+.item:first-of-type{border-top:0}
+.item .q{font-weight:600}
+select,input[type=text],textarea{font:inherit;color:var(--gris);border:1.5px solid var(--trame);border-radius:7px;padding:8px 10px;background:#fff;width:100%}
+select:focus,input:focus,textarea:focus{outline:2px solid var(--rose);border-color:var(--prune)}
+textarea{min-height:130px;resize:vertical}
+select.ok{border-color:var(--ok);background:#eef7f1}select.ko{border-color:var(--ko);background:#fbeeee}
+.fb{grid-column:1/-1;font-size:14px;padding:8px 12px;border-radius:7px;display:none}
+.fb.show{display:block}.fb.ok{background:#eef7f1;border-left:4px solid var(--ok)}.fb.ko{background:#fbeeee;border-left:4px solid var(--ko)}
+.btn{font:inherit;font-weight:700;border:0;border-radius:8px;padding:11px 20px;cursor:pointer;background:var(--prune);color:#fff}
+.btn:hover{background:var(--dark)}
+.btn[disabled]{background:#cbbfc7;cursor:not-allowed}
+.btn.sec{background:#fff;color:var(--prune);border:2px solid var(--prune)}
+.btn.done{background:var(--ok)}
+.row{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:14px}
+.score{font-weight:700;color:var(--dark)}
+.pill{display:inline-block;padding:4px 12px;border-radius:20px;background:var(--light);color:var(--prune);font-weight:700}
+.progress{height:8px;background:var(--trame);border-radius:6px;overflow:hidden;margin:10px 0}
+.progress>div{height:100%;background:var(--prune);width:0;transition:width .3s}
+table.t{width:100%;border-collapse:collapse;font-size:14.5px;margin:8px 0}
+table.t th{background:var(--dark);color:#fff;text-align:left;padding:8px}
+table.t td{border-bottom:1px solid var(--trame);padding:8px;vertical-align:top}
+table.t tr:nth-child(even) td{background:var(--fond)}
+.muted{color:var(--gmoy);font-size:14px}
+.big{font-size:44px;font-weight:800;color:var(--prune);line-height:1}
+.hidden{display:none!important}
+footer.foot{text-align:center;color:var(--gmoy);font-size:12px;padding:20px 0}
+.warn{background:#fff7e8;border-left:5px solid var(--mid);padding:10px 14px;border-radius:0 8px 8px 0}
+.counter{font-size:13px;color:var(--gmoy);text-align:right}
+@media (max-width:700px){.item{grid-template-columns:1fr}header.top h1{font-size:23px}}
+textarea,input{user-select:text}#scrCas .item{grid-template-columns:1fr;gap:6px}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap"><div class="kick">TMK Performances · Eco Conso Habitat — Négociation et argumentation · Jour 2</div><h1>Évaluation de fin de journée — Jour 2</h1><div class="sub">Cas pratique « Le rendez-vous des Leclercq » — noté sur 12 points</div></div></header>
+<main class="wrap">
+
+<section id="scrId"><div class="card"><h2>Identification</h2><div class="consigne"><b>Évaluation individuelle — 35 minutes — un seul essai.</b> Le copier-coller est désactivé. Une fois vos réponses envoyées, vous ne pourrez plus les modifier. À la fin, vous remplirez votre auto-évaluation puis téléchargerez votre bilan (fichier HTML) à transmettre au formateur.</div>
+<div class="item"><div class="q">Nom</div><input type="text" id="nom" autocomplete="off"></div><div class="item"><div class="q">Prénom</div><input type="text" id="prenom" autocomplete="off"></div>
+<div class="row"><button class="btn" id="go" disabled>Commencer l'évaluation</button></div></div></section>
+<section id="scrDone" class="hidden"><div class="card"><h2>Évaluation déjà remise</h2><p>Cette évaluation a déjà été remise depuis ce poste : un seul essai est autorisé.</p><div class="row"><button class="btn" id="redl">Télécharger à nouveau mon bilan</button></div></div></section>
+<section id="scrCas" class="hidden">
+<div class="card"><div class="row" style="justify-content:space-between"><span><b id="who"></b></span><span class="pill" id="timer">35:00</span></div>
+<h2>Cas pratique : Le rendez-vous des Leclercq</h2><p class="muted">Dossier fictif — toute ressemblance avec des personnes existantes serait fortuite</p>
+<p>Vous êtes conseiller commercial chez Eco Conso Habitat. Il y a deux semaines, vous avez présenté à M. et Mme Leclercq un devis complet pour leur maison de 1982 : pompe à chaleur air-eau en remplacement de la chaudière fioul, isolation des combles, accompagnement du dossier d'aides et mise en service.</p>
+<p>Vous êtes chez eux pour la signature annoncée. Dès votre arrivée, le ton change : M. Leclercq accumule les exigences, Mme Leclercq se montre conciliante… puis se ferme.</p>
+<table class="t"><tr><th colspan="2">Ce que vous savez avant le rendez-vous</th></tr>
+<tr><td><b>Le prix</b></td><td>Le prix du devis ne se négocie pas.</td></tr>
+<tr><td><b>Vos marges</b></td><td>Vous pouvez offrir la première année d'entretien et proposer un paiement en trois fois avec un acompte à la commande. La garantie et la date de pose suivent les conditions de l'entreprise.</td></tr>
+<tr><td><b>L'autre devis</b></td><td>M. Leclercq dit en avoir un 15 % moins cher. Vous ne l'avez pas vu.</td></tr>
+<tr><td><b>Au premier rendez-vous</b></td><td>Les Leclercq ont dit dépenser plus de 2 000 € de fioul par an et vouloir « ne plus avoir froid l'hiver ».</td></tr></table></div>
+<div class="card"><span class="tag">Partie A · 4 points</span><h2>Reconnaître les pressions</h2><div class="consigne">Pour chaque phrase entendue pendant le rendez-vous, nommez la pression utilisée. Puis rédigez votre réponse à la pression de l'urgence (« avant 18 h »).</div>
+<div class="item"><div class="q">M. Leclercq : « Avec ma femme, c'est décidé : 13 000 € tout compris, sinon rien. »</div><select id="A_obj" class="req"><option value="">— Choisir —</option><option value="0">Fait accompli</option><option value="1">Urgence factice</option><option value="2">Petit pas après petit pas</option><option value="3">Bon flic / mauvais flic</option></select></div><div class="item"><div class="q">M. Leclercq : « L'autre installateur attend ma réponse avant 18 h. »</div><select id="A_ps" class="req"><option value="">— Choisir —</option><option value="0">Fait accompli</option><option value="1">Urgence factice</option><option value="2">Petit pas après petit pas</option><option value="3">Bon flic / mauvais flic</option></select></div><div class="item"><div class="q">M. Leclercq : « Bon… et la garantie à 10 ans, alors. Et la pose avant Noël. Et l'entretien offert. »</div><select id="A_pos" class="req"><option value="">— Choisir —</option><option value="0">Fait accompli</option><option value="1">Urgence factice</option><option value="2">Petit pas après petit pas</option><option value="3">Bon flic / mauvais flic</option></select></div><div class="item"><div class="q">Mme Leclercq : « Moi je vous trouve sérieux ; faites un petit effort et je convaincs mon mari. »</div><select id="A_mot" class="req"><option value="">— Choisir —</option><option value="0">Fait accompli</option><option value="1">Urgence factice</option><option value="2">Petit pas après petit pas</option><option value="3">Bon flic / mauvais flic</option></select></div>
+<h3>Ma réponse à « L'autre installateur attend ma réponse avant 18 h »</h3><textarea id="A_j" class="req" data-min="100" placeholder="Rédigez votre réponse…"></textarea><div class="counter" id="A_j_c">0 caractère — minimum 100</div></div>
+<div class="card"><span class="tag">Partie B · 2 points</span><h2>Argumenter sous pression</h2><div class="consigne">Choisissez, pour chaque attaque sur le prix, la réponse la plus adaptée.</div>
+<div class="item"><div class="q">M. Leclercq : « De toute façon, c'est trop cher. »</div><select id="B1" class="req"><option value="">— Choisir —</option><option value="0">« On est dans les prix du marché. »</option><option value="1">« J'entends que le prix compte : regardons ce que vous ne paierez plus en fioul chaque hiver. »</option><option value="2">« Notre marge est déjà très faible. »</option><option value="3">« Ailleurs, ce sera moins bien. »</option></select></div><div class="item"><div class="q">M. Leclercq : « L'autre est 15 % moins cher. »</div><select id="B2" class="req"><option value="">— Choisir —</option><option value="0">« Je m'aligne. »</option><option value="1">« Il fait du mauvais travail. »</option><option value="2">« Je vous fais 7 %. »</option><option value="3">« Avant de répondre, j'aimerais comprendre ce que couvre exactement l'autre devis. »</option></select></div></div>
+<div class="card"><span class="tag">Partie C · 4 points</span><h2>Sortir des blocages</h2><div class="consigne">Le rendez-vous se tend. Pour chaque situation, choisissez votre réaction.</div>
+<div class="item"><div class="q">M. Leclercq répète pour la troisième fois : « c'est trop cher ».</div><select id="C0" class="req"><option value="">— Choisir —</option><option value="0">Je reformule : « Si je comprends bien, ce qui vous gêne, c'est… »</option><option value="1">Je répète mes arguments plus fort</option><option value="2">Je baisse le prix</option></select></div><div class="item"><div class="q">Mme Leclercq se tait, bras croisés, depuis une minute.</div><select id="C1" class="req"><option value="">— Choisir —</option><option value="0">Je m'adresse uniquement à M. Leclercq</option><option value="1">Je demande doucement : « Et vous, qu'est-ce qui vous inquiète ? », puis je laisse le silence</option><option value="2">Je presse pour conclure avant qu'elle ne se ferme davantage</option></select></div><div class="item"><div class="q">L'agacement monte des deux côtés.</div><select id="C2" class="req"><option value="">— Choisir —</option><option value="0">Je cède sur la garantie pour détendre l'atmosphère</option><option value="1">Je hausse le ton</option><option value="2">Je propose une pause ou de nous revoir demain, à tête reposée</option></select></div><div class="item"><div class="q">La discussion tourne en rond sur le prix.</div><select id="C3" class="req"><option value="">— Choisir —</option><option value="0">Je change de cadre : « Et si on regardait ce que vous payez aujourd'hui chaque hiver ? »</option><option value="1">Je reprends mon argumentaire depuis le début</option><option value="2">J'attends qu'il se décide</option></select></div></div>
+<div class="card"><span class="tag">Partie D · 2 points</span><h2>Rédiger l'échange</h2><div class="consigne">Rédigez la suite du rendez-vous avec M. Leclercq (8 à 12 répliques), depuis « de toute façon, c'est trop cher » jusqu'à la conclusion : reconnaître, reformuler, ramener au bénéfice client, tenir le prix en proposant une contrepartie ou du temps.</div>
+<h3>Votre dialogue (Commercial : … / M. Leclercq : …)</h3><textarea id="D_j" class="req" data-min="250" placeholder="Rédigez votre réponse…"></textarea><div class="counter" id="D_j_c">0 caractère — minimum 250</div></div>
+<div class="card"><div class="warn">Vérifiez vos réponses : après l'envoi, elles sont définitivement figées.</div><div class="row" style="justify-content:center"><button class="btn" id="send" disabled>Envoyer mes réponses</button></div><p class="muted" id="missing" style="text-align:center"></p></div>
+</section>
+<section id="scrAuto" class="hidden"><div class="card"><h2>Auto-évaluation</h2><div class="consigne">Positionnez-vous honnêtement sur chaque compétence. Votre auto-évaluation est transmise au formateur avec vos réponses.</div><div id="autoList"></div><div class="row"><button class="btn" id="finish" disabled>Terminer et voir mon bilan</button></div></div></section>
+<section id="scrRes" class="hidden"><div class="card"><h2>Évaluation terminée</h2><div class="row"><div class="big" id="ind"></div><div><div class="score">Note indicative calculée par l'outil</div><div class="muted">La note finale est arrêtée par le formateur à l'aide de la grille de notation (critères objectifs).</div></div></div>
+<table class="t" id="crit"></table><div class="row"><button class="btn" id="dl">Télécharger mon bilan (HTML)</button></div><p class="muted">Transmettez ce fichier au formateur.</p></div></section>
+</main>
+<footer class="foot">TMK Performances - N° Siret : 49841924100027 - Code NAF : 8559A</footer>
+<script>
+(function(){
+  var stop=function(e){e.preventDefault();return false;};
+  ['copy','cut','paste','drop','contextmenu','dragstart'].forEach(function(ev){document.addEventListener(ev,stop,true);});
+  document.addEventListener('keydown',function(e){var k=(e.key||'').toLowerCase();if((e.ctrlKey||e.metaKey)&&['c','v','x','a','insert'].indexOf(k)>=0){e.preventDefault();} if(e.shiftKey&&k==='insert'){e.preventDefault();}},true);
+  document.documentElement.style.userSelect='none';
+})();
+
+var E={"titre": "Évaluation de fin de journée — Jour 2", "cas": "Le rendez-vous des Leclercq", "A": [0, 1, 2, 3], "B": [1, 3], "C": [0, 1, 2, 0], "kwA": [["engag", "dix ans", "10 ans", "longtemps", "somme", "montant", "enjeu", "investissement"], ["prendre le temps", "le temps", "comparer", "reflech", "tranquill", "sans vous presser"], ["demain", "48", "rappel", "repasse", "reviens", "revoir", "rendez-vous", "rdv"], ["ne baisse pas", "pas de remise", "sans remise", "pas de geste", "prix reste", "maintien", "ne change pas", "meme prix", "pas baisser", "pas de baisse", "ne m'aligne pas", "pas m'aligner"]], "kwD": [["j'entends", "je comprends", "c'est legitime", "c'est normal", "je vous entends"], ["si je comprends bien", "si je vous ai bien compris", "autrement dit", "vous me dites", "ce qui vous gene", "ce qui compte pour vous"], ["econom", "facture", "fioul", "confort", "froid", "tranquill", "valeur", "benefice"], ["ne vais pas m'aligner", "ne m'aligne pas", "pas de remise", "ne baisse pas", "prix reste", "maintien", "sans baisser", "en echange", "en contrepartie", "si nous signons", "prendre le temps", "demain"]], "autoEval": ["Je sais reconnaître les 4 pressions classiques", "Je sais répondre à l'urgence sans céder", "Je sais ramener au bénéfice client face à « c'est trop cher »", "Je sais repérer un blocage et choisir un levier de relance", "Je sais tenir le prix sans casser la relation"]}, CODE="NEGO_J2", FOOT="TMK Performances - N° Siret : 49841924100027 - Code NAF : 8559A", CSSB="\n:root{--prune:#8C1E70;--dark:#5E1349;--light:#F4E6EE;--rose:#C77BAA;--vert:#283C28;--gris:#3C3C3C;--gmoy:#8A7A85;--trame:#E8DCE5;--fond:#FAF6F8;--ok:#2F7A4F;--ko:#B23B3B;--mid:#B5852A}\n*{box-sizing:border-box}\nhtml,body{margin:0;padding:0}\nbody{font-family:Calibri,\"Segoe UI\",Carlito,Arial,sans-serif;background:var(--fond);color:var(--gris);font-size:16px;line-height:1.5}\n.wrap{max-width:980px;margin:0 auto;padding:0 18px 40px}\nheader.top{background:var(--dark);color:#fff;padding:22px 0 20px;border-bottom:5px solid var(--rose)}\nheader.top .kick{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--rose);font-weight:700}\nheader.top h1{margin:6px 0 4px;font-size:28px;line-height:1.2}\nheader.top .sub{color:var(--trame);font-style:italic}\n.card{background:#fff;border:1px solid var(--trame);border-radius:10px;padding:20px 22px;margin:18px 0;box-shadow:0 1px 3px rgba(94,19,73,.06)}\n.card h2{margin:0 0 6px;color:var(--dark);font-size:21px}\n.card h3{margin:14px 0 6px;color:var(--prune);font-size:17px}\n.consigne{background:var(--light);border-left:5px solid var(--prune);padding:12px 16px;border-radius:0 8px 8px 0;margin:10px 0 14px}\n.tag{display:inline-block;background:var(--light);color:var(--prune);font-weight:700;font-size:12px;padding:2px 9px;border-radius:20px;margin-right:6px}\n.item{display:grid;grid-template-columns:1fr 290px;gap:12px;align-items:center;padding:10px 0;border-top:1px solid var(--trame)}\n.item:first-of-type{border-top:0}\n.item .q{font-weight:600}\nselect,input[type=text],textarea{font:inherit;color:var(--gris);border:1.5px solid var(--trame);border-radius:7px;padding:8px 10px;background:#fff;width:100%}\nselect:focus,input:focus,textarea:focus{outline:2px solid var(--rose);border-color:var(--prune)}\ntextarea{min-height:130px;resize:vertical}\nselect.ok{border-color:var(--ok);background:#eef7f1}select.ko{border-color:var(--ko);background:#fbeeee}\n.fb{grid-column:1/-1;font-size:14px;padding:8px 12px;border-radius:7px;display:none}\n.fb.show{display:block}.fb.ok{background:#eef7f1;border-left:4px solid var(--ok)}.fb.ko{background:#fbeeee;border-left:4px solid var(--ko)}\n.btn{font:inherit;font-weight:700;border:0;border-radius:8px;padding:11px 20px;cursor:pointer;background:var(--prune);color:#fff}\n.btn:hover{background:var(--dark)}\n.btn[disabled]{background:#cbbfc7;cursor:not-allowed}\n.btn.sec{background:#fff;color:var(--prune);border:2px solid var(--prune)}\n.btn.done{background:var(--ok)}\n.row{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:14px}\n.score{font-weight:700;color:var(--dark)}\n.pill{display:inline-block;padding:4px 12px;border-radius:20px;background:var(--light);color:var(--prune);font-weight:700}\n.progress{height:8px;background:var(--trame);border-radius:6px;overflow:hidden;margin:10px 0}\n.progress>div{height:100%;background:var(--prune);width:0;transition:width .3s}\ntable.t{width:100%;border-collapse:collapse;font-size:14.5px;margin:8px 0}\ntable.t th{background:var(--dark);color:#fff;text-align:left;padding:8px}\ntable.t td{border-bottom:1px solid var(--trame);padding:8px;vertical-align:top}\ntable.t tr:nth-child(even) td{background:var(--fond)}\n.muted{color:var(--gmoy);font-size:14px}\n.big{font-size:44px;font-weight:800;color:var(--prune);line-height:1}\n.hidden{display:none!important}\nfooter.foot{text-align:center;color:var(--gmoy);font-size:12px;padding:20px 0}\n.warn{background:#fff7e8;border-left:5px solid var(--mid);padding:10px 14px;border-radius:0 8px 8px 0}\n.counter{font-size:13px;color:var(--gmoy);text-align:right}\n@media (max-width:700px){.item{grid-template-columns:1fr}header.top h1{font-size:23px}}\n";
+var KEY='ECH_eval_'+CODE+'_bilan', ident={}, t0=null, answers={}, crit=[], auto=[], bilanHTML=null;
+function h(t){var d=document.createElement('div');d.textContent=t;return d.innerHTML;}
+function norm(s){return String(s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[’‘]/g,"'");}
+function has(txt,group){var n=norm(txt);return group.some(function(k){return n.indexOf(norm(k))>=0;});}
+function groups(txt,gs){return gs.filter(function(g){return has(txt,g);}).length;}
+function fr(x){return String(Math.round(x*100)/100).replace('.',',');}
+function store(k,v){try{localStorage.setItem(k,v);}catch(e){}}
+function load(k){try{return localStorage.getItem(k);}catch(e){return null;}}
+function show(id){['scrId','scrDone','scrCas','scrAuto','scrRes'].forEach(function(s){document.getElementById(s).classList.toggle('hidden',s!==id);});window.scrollTo(0,0);}
+if(load(KEY)){bilanHTML=load(KEY);show('scrDone');}
+var nom=document.getElementById('nom'),pre=document.getElementById('prenom');
+[nom,pre].forEach(function(i){i.addEventListener('input',function(){document.getElementById('go').disabled=!(nom.value.trim()&&pre.value.trim());});});
+document.getElementById('go').addEventListener('click',function(){ident={nom:nom.value.trim().toUpperCase(),prenom:pre.value.trim()};document.getElementById('who').textContent=ident.prenom+' '+ident.nom;t0=new Date();show('scrCas');tick();});
+function tick(){var el=document.getElementById('timer');setInterval(function(){var s=35*60-Math.floor((new Date()-t0)/1000),neg=s<0;s=Math.abs(s);el.textContent=(neg?'+':'')+String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');if(neg)el.style.background='#fff7e8';},1000);}
+var reqs=Array.prototype.slice.call(document.querySelectorAll('#scrCas .req'));
+function check(){var miss=0;reqs.forEach(function(r){if(r.tagName==='SELECT'){if(r.value==='')miss++;}else{var n=r.value.trim().length,m=Number(r.dataset.min);document.getElementById(r.id+'_c').textContent=n+' caractère(s) — minimum '+m;if(n<m)miss++;}});document.getElementById('send').disabled=miss>0;document.getElementById('missing').textContent=miss?miss+' réponse(s) encore incomplète(s)':'';}
+reqs.forEach(function(r){r.addEventListener(r.tagName==='SELECT'?'change':'input',check);});check();
+function v(id){var e=document.getElementById(id);return e?e.value:'';}
+function score(){
+  crit=[];
+  var idsA=['A_obj','A_ps','A_pos','A_mot'], okA=idsA.filter(function(id,i){return Number(v(id))===E.A[i];}).length;
+  crit.push({c:'A1. Pressions reconnues',max:2,pts:okA*0.5,d:okA+' pression(s) sur 4 correctement nommée(s)'});
+  var gA=groups(v('A_j'),E.kwA);
+  crit.push({c:'A2. Réponse à l\'urgence factice',max:2,pts:gA*0.5,d:gA+' élément(s) sur 4 détecté(s) : rappel de l\'enjeu, temps proposé, rendez-vous fixé, prix maintenu'});
+  var okB=['B1','B2'].filter(function(id,i){return Number(v(id))===E.B[i];}).length;
+  crit.push({c:'B. Argumenter sous pression',max:2,pts:okB,d:okB+' réponse(s) adaptée(s) sur 2'});
+  var okC=['C0','C1','C2','C3'].filter(function(id,i){return Number(v(id))===E.C[i];}).length;
+  crit.push({c:'C. Sortir des blocages',max:4,pts:okC,d:okC+' réponse(s) adaptée(s) sur 4'});
+  var gD=groups(v('D_j'),E.kwD);
+  crit.push({c:'D. Échange rédigé',max:2,pts:gD*0.5,d:gD+' élément(s) sur 4 détecté(s) : reconnaître, reformuler, ramener au bénéfice, tenir le prix'});
+  return crit.reduce(function(a,c){return a+c.pts;},0);
+}
+document.getElementById('send').addEventListener('click',function(){
+  if(!confirm('Envoyer définitivement vos réponses ? Vous ne pourrez plus les modifier.')) return;
+  reqs.forEach(function(r){answers[r.id]=r.tagName==='SELECT'?r.options[r.selectedIndex].text:r.value;r.disabled=true;});
+  this.disabled=true;
+  var L=document.getElementById('autoList');L.innerHTML=E.autoEval.map(function(a,i){return '<div class="item"><div class="q">'+h(a)+'</div><select id="ae'+i+'"><option value="">— Choisir —</option><option>Acquis</option><option>En cours d\'acquisition</option><option>Non acquis</option></select></div>';}).join('');
+  var ae=L.querySelectorAll('select');ae.forEach(function(s){s.addEventListener('change',function(){document.getElementById('finish').disabled=Array.prototype.some.call(ae,function(x){return x.value==='';});});});
+  show('scrAuto');
+});
+document.getElementById('finish').addEventListener('click',function(){
+  auto=E.autoEval.map(function(a,i){return {c:a,v:v('ae'+i)};});
+  var tot=score();document.getElementById('ind').textContent=fr(tot)+' / 12';
+  document.getElementById('crit').innerHTML='<tr><th>Critère</th><th>Constat de l\'outil</th><th>Points</th></tr>'+crit.map(function(c){return '<tr><td>'+h(c.c)+'</td><td>'+h(c.d)+'</td><td>'+fr(c.pts)+' / '+fr(c.max)+'</td></tr>';}).join('');
+  bilanHTML=buildBilan(tot);store(KEY,bilanHTML);show('scrRes');
+});
+function buildBilan(tot){
+  var end=new Date(),mins=Math.round((end-t0)/60000),ds=end.toLocaleDateString('fr-FR')+' à '+end.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'});
+  var lab={};document.querySelectorAll('#scrCas .req').forEach(function(r){var q=r.closest('.item');var t=q?q.querySelector('.q').textContent:(r.previousElementSibling?r.previousElementSibling.textContent:r.id);lab[r.id]=t;});
+  var rep=Object.keys(answers).map(function(k){return '<tr><td>'+h(lab[k]||k)+'</td><td style="white-space:pre-wrap">'+h(answers[k])+'</td></tr>';}).join('');
+  return '<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><title>Bilan — '+h(E.titre)+' — '+h(ident.nom)+' '+h(ident.prenom)+'</title><style>'+CSSB+'</style></head><body><header class="top"><div class="wrap"><div class="kick">Bilan de l\'évaluation de fin de journée</div><h1>'+h(E.titre)+'</h1><div class="sub">Cas pratique « '+h(E.cas)+' »</div></div></header><main class="wrap">'+
+  '<div class="card"><table class="t"><tr><th colspan="2">Stagiaire</th></tr><tr><td>Nom</td><td><b>'+h(ident.nom)+'</b></td></tr><tr><td>Prénom</td><td><b>'+h(ident.prenom)+'</b></td></tr><tr><td>Remis le</td><td>'+ds+'</td></tr><tr><td>Durée</td><td>'+mins+' min</td></tr></table></div>'+
+  '<div class="card"><div class="row"><div class="big">'+fr(tot)+' / 12</div><div class="score">Note indicative calculée par l\'outil — note finale arrêtée par le formateur avec la grille de notation</div></div><table class="t"><tr><th>Critère</th><th>Constat de l\'outil</th><th>Points</th></tr>'+crit.map(function(c){return '<tr><td>'+h(c.c)+'</td><td>'+h(c.d)+'</td><td>'+fr(c.pts)+' / '+fr(c.max)+'</td></tr>';}).join('')+'</table></div>'+
+  '<div class="card"><h3>Auto-évaluation du stagiaire</h3><table class="t"><tr><th>Compétence</th><th>Positionnement</th></tr>'+auto.map(function(a){return '<tr><td>'+h(a.c)+'</td><td><b>'+h(a.v)+'</b></td></tr>';}).join('')+'</table></div>'+
+  '<div class="card"><h3>Réponses du stagiaire</h3><table class="t"><tr><th>Question</th><th>Réponse</th></tr>'+rep+'</table></div></main><footer class="foot">'+h(FOOT)+'</footer></body></html>';
+}
+function dl(){if(!bilanHTML)return;var b=new Blob([bilanHTML],{type:'text/html'}),a=document.createElement('a');a.href=URL.createObjectURL(b);var n=((ident.nom||'stagiaire')+'_'+(ident.prenom||'')).normalize('NFD').replace(/[̀-ͯ]/g,'');a.download='Bilan_Evaluation_ECH_'+CODE+'_'+n.replace(/[^A-Za-z0-9_-]+/g,'')+'.html';document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove();},500);}
+document.getElementById('dl').addEventListener('click',dl);document.getElementById('redl').addEventListener('click',dl);
+</script>
+</body>
+</html>
